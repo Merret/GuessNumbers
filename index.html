@@ -1,7 +1,59 @@
 <html>
 <head>
 <title>Guess Numbers Online</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+body {
+	font-family: 'Noto Sans TC', sans-serif;
+}
+</style>
 </head>
-<body>
+<body style="text-align: center;">
+<h1>Guess Numbers Online</h1>
+<p id="v"></p>
+<input type="number" id="input" placeholder="Type a number" style="margin: 5px"/>
+<button style="margin: 5px" id="b" onClick="chosen()"></button>
+<br>
+<!--<button id="cl" style="margin: 5px; position: relative; top: 20px">Change Language</button>-->
+<script>
+	var view = document.getElementById("v");
+	var b = document.getElementById("b");
+	var cl = document.getElementById("cl");
+	var count, ans;
+	choose();
+	function choose() {
+		view.innerHTML = "Choose a number from 1 to 100,000,000";
+		b.innerHTML = "Start!";
+		b.onclick = function() {chosen()};
+	}
+	function chosen() {
+		var n = document.getElementById("input").value;
+		view.innerHTML = "Game Started!<br> Number range: 1 ~ " + n;
+		ans = Math.floor((Math.random() * n) + 1);
+		document.getElementById("input").value = "";
+		b.innerHTML = "Check it";
+		b.onclick = function() {check()};
+		count = 0;
+	}
+	function check() {
+		count++;
+		if(document.getElementById("input").value == ans) {
+			view.innerHTML = "Excellent! You guessed " + count + " times on this game!";
+			b.innerHTML = "Restart";
+			b.onclick = function() {choose()};
+		} else if(document.getElementById("input").value > ans){
+			view.innerHTML = "Wrong!! Wrong answer! Too High!";
+		} else if(document.getElementById("input").value < ans){
+			view.innerHTML = "Wrong!! Wrong answer! Too Low!";
+		}
+	}
+	document.getElementById("input").addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+				document.getElementById("b").click();
+			}
+	});
+</script>
 </body>
 </html>
