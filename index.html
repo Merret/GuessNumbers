@@ -9,6 +9,7 @@ body {
 	font-family: 'Noto Sans TC', sans-serif;
 }
 </style>
+	<script src="https://cdn.jsdelivr.net/gh/Merret/UsefulJS@0.2/js/urldata.min.js"></script>
 </head>
 <body style="text-align: center;">
 <h1>Guess Numbers Online</h1>
@@ -24,6 +25,7 @@ body {
 	var cl = document.getElementById("cl");
 	var count, ans;
 	choose();
+	if(urldata("r")!=-1) {document.getElementById("input").value=urldata("r");chosen();}
 	function choose() {
 		view.innerHTML = "Choose a number from 1 to 100,000,000";
 		b.innerHTML = "Start!";
